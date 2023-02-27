@@ -36,10 +36,10 @@ const Body = () => {
       ) : (
         // <h1>loading....</h1>
         <>
-          <div className="search-container">
+          <div className="text-center">
             <input
               value={searchText}
-              className="search-input"
+              className="px-6"
               onChange={(e) => {
                 setSearchText(e.target.value);
                 if (searchText.length === 1) {
@@ -48,14 +48,16 @@ const Body = () => {
               }}
               placeholder="Search Restaraunt"
             />
-            <button onClick={() => {
+            <button 
+            className="px-6 py-0.5 ml-3 bg-gray-100"
+            onClick={() => {
               const data = searchRestraurants(searchText,allRestraurants);
               setRestarauntList(data);
             }}>
               Search
             </button>
           </div>
-          <div className="restaraunts">
+          <div className="grid grid-cols-3 w-[100%] gap-2">
             {restarauntList.length===0 ? (
               <h2>No Restaraunt Found</h2>
             ) : (
@@ -64,8 +66,9 @@ const Body = () => {
                   <Link
                     to={"/restraurants/"+restaraunts.data.id}
                     key={restaraunts.data.id}
+                    
                   >
-                    <RestraurantCard {...restaraunts.data} />
+                   <RestraurantCard {...restaraunts.data} />
                   </Link>
                 );
               })

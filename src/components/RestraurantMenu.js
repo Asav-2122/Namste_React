@@ -12,9 +12,9 @@ const RestraurantMenu = () => {
     return;
   }
   return (
-    <div className="restraurants-menu">
+    <div className="flex gap-7">
       <div>
-        <img src={IMG_CDN_URL + restraurant.cloudinaryImageId} />
+        <img className="w-60 h-26" src={IMG_CDN_URL + restraurant.cloudinaryImageId} />
         <h1>{restraurant.name}</h1>
         <h3>{restraurant.city}</h3>
         <h3>{restraurant.costForTwoMsg}</h3>
@@ -28,7 +28,7 @@ const RestraurantMenu = () => {
           })}
         </ul>
       </div>
-      <div></div>
+     
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import "./index.css";
 // import {About} from "./components/About";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./components/Error";
@@ -24,6 +25,7 @@ const About = lazy(() => import("./components/About"));
 const App = () => {
   return (
     <>
+    
       <Header />
       <Outlet />
       {/* every children of App(Body,About,Contact) will come in outlet accoring to the route. we are doing this because we want our navbar and footer in all the component so that our navigation will become easy. */}

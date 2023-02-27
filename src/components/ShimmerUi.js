@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./RestraurantCard.css";
+// import "./RestraurantCard.css";
 
 const ShimmerUi = () => {
   const [allRestraurants, setAllRestraurants] = useState([]);
