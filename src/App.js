@@ -9,6 +9,10 @@ import Error from "./components/Error";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import RestraurantMenu from "./components/RestraurantMenu";
+import userContext from "./utils/userContext";
+import { Provider, useSelector } from "react-redux";
+import store from "./redux/store";
+import Cart from "./components/Cart";
 // this is how you can write code using React.createElement
 // const header1 = React.createElement("h1",{id:"header1",key:"1"},"Namste React From React CDN parcel package");
 // const header2 = React.createElement("h2",{id:"header2",key:"2"},"Namste React From React CDN");
@@ -23,14 +27,21 @@ import RestraurantMenu from "./components/RestraurantMenu";
 const About = lazy(() => import("./components/About")); 
 
 const App = () => {
+ 
   return (
-    <>
+    <Provider store={store}>
+    <userContext.Provider value={{user:{
+      name:"Aasav Pandya",
+      email:"asav@gmail.com",
+    }
+    }}>
     
       <Header />
       <Outlet />
       {/* every children of App(Body,About,Contact) will come in outlet accoring to the route. we are doing this because we want our navbar and footer in all the component so that our navigation will become easy. */}
       <Footer />
-    </>
+    </userContext.Provider>
+    </Provider>
   );
 };
 
@@ -47,7 +58,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: (
-          <Suspense>
+          <Suspense fallback={<h1>Loading....</h1>}>
             <About />
           </Suspense>
         ),
@@ -59,6 +70,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restraurants/:id",
         element: <RestraurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
