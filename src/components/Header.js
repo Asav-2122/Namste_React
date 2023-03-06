@@ -10,7 +10,7 @@ const Header = () => {
   const products = useSelector((store) => store.cart.products);
   
   return (
-    <div className="flex justify-between p-0 m-0 bg-orange-300 h-20">
+    <div className="flex justify-between p-0 m-0 bg-black h-20 text-white">
      <Link to="/"> <img
         className="h-20 hover:bg-blue-500"
         src="https://img.freepik.com/premium-vector/restaurant-food-house-logo-template_57516-341.jpg?w=2000"
@@ -23,7 +23,7 @@ const Header = () => {
           <li className="mx-3"><Link to="/">Home</Link></li>
           <li className="mx-3"><Link to="/about">About</Link></li>
           <li className="mx-3"><Link to="/contact">Contact</Link></li>
-          <li className="mx-3 px-1 border-2 border-black-300"><Link to="/cart">Cart- {products.length}</Link></li>
+          <li className="mx-3 px-1 border-2 border-black-300"><Link to="/cart">Cart- {Object.keys(products).length}</Link></li>
         </ul>
       </div>
       {!isLoggedIn ? (

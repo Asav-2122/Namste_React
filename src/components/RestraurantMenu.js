@@ -12,8 +12,8 @@ const RestraurantMenu = () => {
   const { name, email } = user;
   const restraurant = useRestraurant(id);
   const dispatch = useDispatch();
-  const handleAddItem=(item)=>{
-       dispatch(addProduct(item))
+  const handleAddItem=(item,itemName)=>{
+       dispatch(addProduct({item,itemName}))
   }
   if (!restraurant) {
     return;
@@ -38,7 +38,7 @@ const RestraurantMenu = () => {
             return (
               <div key={ele.id}>
                 <li>{ele.name}</li>
-                <button  className="bg-green-200 p-2 m-2 rounded-md"  onClick={() => handleAddItem(ele)}>
+                <button  className="bg-green-200 p-2 m-2 rounded-md"  onClick={() => handleAddItem(ele,ele.name)}>
                   Add Item
                 </button>
               </div>

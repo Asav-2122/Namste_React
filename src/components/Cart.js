@@ -11,8 +11,8 @@ const Cart=()=>{
    }
     return(
         <div>
-
-            <h1 className="font-bold text-lg">You have {products.length} Food Items In Your Cart.</h1>
+            
+            <h1 className="font-bold text-lg">You have {Object.keys(products).length} Food Items In Your Cart.</h1>
             <button className="p-2 m-2 bg-slate-400 rounded-md" onClick={handleClearCart}>Clear Cart</button>
             <CartFoodItems products={products}/>
         </div>

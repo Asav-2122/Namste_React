@@ -57,7 +57,8 @@ const Body = () => {
               Search
             </button>
           </div>
-          <div className="grid grid-cols-3 w-[100%] gap-2">
+          {/* <div className="grid grid-cols-5 w-[100%] gap-12 group-hover:border-2 border-black"> */}
+            <div className="flex flex-wrap w-[100%] gap-11">
             {restarauntList.length===0 ? (
               <h2>No Restaraunt Found</h2>
             ) : (
