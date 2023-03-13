@@ -10,7 +10,7 @@ import React from 'react';
   }
   render(){
   return (
-  <div>
+  <div className='h-[76vh] border-2 border-red-800'>
       <h1>This is About Class Component</h1>
        {this.state.count}
       <button onClick={()=>this.setState((previousState)=>({count:previousState.count+1}))}>set counter</button>
