@@ -44,56 +44,67 @@ const RestraurantMenu = () => {
       </div>
       <div>
         <div className="ml-10">
-        
-         
           {restraurant[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.map(
             (ele, index) =>
               index > 0 && (
                 <div className="w-[60vw] shadow-lg mb-5" key={index}>
-                       
                   <div className="flex justify-around items-center">
-                  <h1 className="font-bold ml-32">{ele?.card?.card?.title}</h1>
-                  <button
-                    className="bg-gray-200 rounded-md"
-                    onClick={() => {
-                      setToggleMenuId(index),
-                      setIsToggleMenuOpen(!isToggleMenuOpen);
-                    }}
-                  >
-                    {isToggleMenuOpen && toggleMenuId === index
-                      ? "Close"
-                      : "Open"}
-                  </button>
+                    <h1 className="font-bold ml-32">
+                      {ele?.card?.card?.title}
+                    </h1>
+                    <button
+                      className="bg-gray-200 rounded-md"
+                      onClick={() => {
+                        setToggleMenuId(index),
+                          setIsToggleMenuOpen(!isToggleMenuOpen);
+                      }}
+                    >
+                      {isToggleMenuOpen && toggleMenuId === index
+                        ? "Close"
+                        : "Open"}
+                    </button>
                   </div>
-                 
-                  {(toggleMenuId === index ||
-                  isToggleMenuOpen) &&
+
+                  {(toggleMenuId === index || isToggleMenuOpen) &&
                   index > 0 &&
                   ele?.card?.card?.itemCards
                     ? ele?.card?.card?.itemCards.map((ele) => (
                         <div key={ele?.card?.info?.id}>
-                          <div className="flex justify-around items-center -ml-18 h-32">
+                          <div className="flex justify-around items-center -ml-18 h-52">
                             <div className="flex flex-col">
                               <h3>{ele?.card?.info?.name}</h3>
                               <h4>Price:{ele?.card?.info?.price / 100}</h4>
                             </div>
 
-                            <div>
+                            <div className="flex flex-col gap-1">
                               <img
                                 className="h-28 rounded-md"
                                 src={IMG_CDN_URL + ele?.card?.info.imageId}
                               />
+                              <button
+                                className="bg-green-200 p-0 mt-0 rounded-md"
+                                onClick={() => handleAddItem(ele?.card?.info, ele?.card?.info?.name)}
+                              >
+                                +
+                              </button>
+                              <span className="text-center w-full font-bold">
+                                {foodItems[ele?.card?.info?.id]?.["count"] || 0}
+                              </span>
+                              <button
+                                className="bg-green-200 p-0 m-0 rounded-md"
+                                onClick={() => handleRemoveItem(ele?.card?.info?.id)}
+                              >
+                                -
+                              </button>
                             </div>
                           </div>
                           <hr />
                         </div>
                       ))
                     : null}
-                </div> 
-                
+                </div>
               )
           )}
-          
         </div>
 
         {/* <ul className="grid grid-cols-3 place-items-center">

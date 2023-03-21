@@ -26,7 +26,7 @@ const CartFoodItems = ({ products }) => {
             <div key={item[1].id}>
             <div className="flex gap-8 my-4 h-[18%] justify-center" >
               <img
-                src={IMG_CDN_URL + item[1].cloudinaryImageId}
+                src={IMG_CDN_URL + item[1].imageId}
                 alt="Food-Image"
                 className="w-[20%] h-full rounded-md"
               />
