@@ -62,13 +62,14 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-4 place-items-center h-[80vh]">
+      <div className="grid grid-cols-3 place-items-center h-[80vh]">
         {restarauntList.length === 0 ? (
           <h2>No Restaraunt Found</h2>
         ) : (
           restarauntList?.map((restaraunts) => {
+            // console.log(restaraunts)
             return (
-              <Link
+             <Link
                 to={"/restraurants/" + restaraunts.data.id}
                 key={restaraunts.data.id}
               >

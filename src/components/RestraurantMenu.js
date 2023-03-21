@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constant";
 import useRestraurant from "../utils/useRestraurant";
@@ -8,39 +8,95 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct, removeProduct } from "../redux/cartSlice";
 import ShimmerUi from "./ShimmerUi";
 const RestraurantMenu = () => {
+  const [toggleMenuId, setToggleMenuId] = useState();
+  const [isToggleMenuOpen, setIsToggleMenuOpen] = useState(true);
   const { id } = useParams();
   const { user } = useContext(userContext);
   const { name, email } = user;
   const restraurant = useRestraurant(id);
-  const foodItems = useSelector((store)=>store.cart.products);
+  const foodItems = useSelector((store) => store.cart.products);
   const dispatch = useDispatch();
-  const handleAddItem=(item,itemName)=>{
-       dispatch(addProduct({item,itemName}))
-  }
-  const handleRemoveItem=(id)=>{
-     dispatch(removeProduct(id))
-  }
+  const handleAddItem = (item, itemName) => {
+    dispatch(addProduct({ item, itemName }));
+  };
+  const handleRemoveItem = (id) => {
+    dispatch(removeProduct(id));
+  };
   if (!restraurant) {
-    return <ShimmerUi/>;
+    return <ShimmerUi />;
   }
   return (
     <div className="flex gap-7 flex-col my-5">
       <div className="flex justify-center items-center -mt-5 gap-24 shadow-md bg-gray-50 h-48">
-        <img  
+        <img
           className="w-52 h-32 rounded-md"
-          src={IMG_CDN_URL + restraurant.cloudinaryImageId}
+          src={IMG_CDN_URL + restraurant[0].card.card.info.cloudinaryImageId}
         />
         <div className="flex flex-col">
-        <h1 className="font-bold text-2xl">{restraurant.name}</h1>
-        <h3>{restraurant.city}</h3>
-        <h3>{restraurant.costForTwoMsg}</h3>
-        <h3>{restraurant.avgRating + " stars"}</h3>
-        {/* <h3>{name + " " + email}</h3> */}
+          <h1 className="font-bold text-2xl">
+            {restraurant[0].card.card.info.name}
+          </h1>
+          <h3>{restraurant[0].card.card.info.city}</h3>
+          <h3>{restraurant[0].card.card.info.costForTwoMessage}</h3>
+          <h3>{restraurant[0].card.card.info.avgRating + " stars"}</h3>
+          {/* <h3>{name + " " + email}</h3> */}
         </div>
       </div>
       <div>
-        {/* <h2 className="text-center font-bold mb-4">Menu List</h2> */}
-        <ul className="grid grid-cols-3 place-items-center">
+        <div className="ml-10">
+        
+         
+          {restraurant[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.map(
+            (ele, index) =>
+              index > 0 && (
+                <div className="w-[60vw] shadow-lg mb-5" key={index}>
+                       
+                  <div className="flex justify-around items-center">
+                  <h1 className="font-bold ml-32">{ele?.card?.card?.title}</h1>
+                  <button
+                    className="bg-gray-200 rounded-md"
+                    onClick={() => {
+                      setToggleMenuId(index),
+                      setIsToggleMenuOpen(!isToggleMenuOpen);
+                    }}
+                  >
+                    {isToggleMenuOpen && toggleMenuId === index
+                      ? "Close"
+                      : "Open"}
+                  </button>
+                  </div>
+                 
+                  {(toggleMenuId === index ||
+                  isToggleMenuOpen) &&
+                  index > 0 &&
+                  ele?.card?.card?.itemCards
+                    ? ele?.card?.card?.itemCards.map((ele) => (
+                        <div key={ele?.card?.info?.id}>
+                          <div className="flex justify-around items-center -ml-18 h-32">
+                            <div className="flex flex-col">
+                              <h3>{ele?.card?.info?.name}</h3>
+                              <h4>Price:{ele?.card?.info?.price / 100}</h4>
+                            </div>
+
+                            <div>
+                              <img
+                                className="h-28 rounded-md"
+                                src={IMG_CDN_URL + ele?.card?.info.imageId}
+                              />
+                            </div>
+                          </div>
+                          <hr />
+                        </div>
+                      ))
+                    : null}
+                </div> 
+                
+              )
+          )}
+          
+        </div>
+
+        {/* <ul className="grid grid-cols-3 place-items-center">
           {Object.values(restraurant?.menu?.items).map((ele) => {
             return (
             
@@ -66,7 +122,7 @@ const RestraurantMenu = () => {
               
             );
           })}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );
